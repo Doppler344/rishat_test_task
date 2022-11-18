@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+  <head>
+    <title>Buy Item 1</title>
+
+  </head>
+
+  <body>
+    <h1>Item 1</h1>
+    <p>Description of Item 1</p>
+    <p>1111</p>
+    <button id="buy-button">Buy</button>
+
+  </body>
+  <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+  <script>
+      var stripe = Stripe('{{ stripe_public_key }}');
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+        // Create a new Checkout Session using the server-side endpoint
+        // Redirect to Stripe Session Checkout
+        fetch('/buy/1', {method: 'GET'})
+        .then(response => {return response.json()})
+        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+      });
+    </script>
+</html>

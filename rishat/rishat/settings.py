@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 import environ
@@ -26,6 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -60,7 +62,7 @@ ROOT_URLCONF = 'rishat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
