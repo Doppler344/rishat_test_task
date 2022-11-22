@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stripe_checkout.apps.StripeCheckoutConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

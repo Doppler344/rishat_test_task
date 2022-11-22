@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+<a href="/admin"><h1>Admin panel</h1></a>
+<h2>Items:</h2>
+{% for item in items_list %}
+<a href="/item/{{ item.pk }}">
+<h3>{{ item.name }}</h3>
+    </a>
+    <p>{{ item.description }}</p>
+    <p>{{ item.price }} {{ item.currency }}</p>
+{% endfor %}
+<h2>Orders (lists of items for Stripe):</h2>
+{% for obj in orders_with_set_list %}
+    <a href="/order/{{ obj.order.pk }}">
+    <h3>{{ obj.order.pk }}</h3>
+    </a>
+    <p>{{ obj.order.date_of_order }}</p>
+    <p>{{ obj.order.status }}</p>
+    <p> {{ obj.order.currency }}</p>
+    <p> {{ obj.items }}</p>
+{% endfor %}
+
+</body>
+</html>

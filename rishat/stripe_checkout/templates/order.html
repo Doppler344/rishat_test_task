@@ -1,14 +1,17 @@
 {% load static %}
 <html>
   <head>
-    <title>Buy Item 1</title>
+    <title>Buy order {{ order.pk }}</title>
 
   </head>
 
   <body>
-    <h1>Item 1</h1>
-    <p>Description of Item 1</p>
-    <p>1111</p>
+    <h1>{{ order.date_of_order }}</h1>
+    <p>{{ order.status }}</p>
+    <p>{{ order.tax_id }}</p>
+    <p>{{ order.discount_id }}</p>
+    <p>{{ order.currency }}</p>
+    <p>{{ items }}</p>
     <button id="buy-button">Buy</button>
 
   </body>
@@ -19,7 +22,7 @@
       buyButton.addEventListener('click', function() {
         // Create a new Checkout Session using the server-side endpoint
         // Redirect to Stripe Session Checkout
-        fetch('/buy/1', {method: 'GET'})
+        fetch('/buy_order/{{ order.pk }}', {method: 'GET'})
         .then(response => {return response.json()})
         .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
       });

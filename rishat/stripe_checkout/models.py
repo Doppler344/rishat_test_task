@@ -68,6 +68,15 @@ class Order(models.Model):
 
 
 class OrderSet(models.Model):
-    order_id = models.ForeignKey('Order', on_delete=models.CASCADE, blank=False)
-    item_id = models.ForeignKey('Item', on_delete=models.CASCADE, blank=False)
+    order_id: Order = models.ForeignKey('Order', on_delete=models.CASCADE, blank=False)
+    item_id: Item = models.ForeignKey('Item', on_delete=models.CASCADE, blank=False)
     amount = models.PositiveIntegerField(verbose_name="Количество", blank=False)
+
+    def save(self, *args, **kwargs):
+        if self.order_id.currency != self.item_id.currency:
+            raise ValueError("Currency must be equals")
+        return super(OrderSet, self).save(*args, **kwargs)
+
+    def __str__(self):
+        # TODO optimize queries to db
+        return f'{self.order_id} - {self.item_id} - {self.amount}'
