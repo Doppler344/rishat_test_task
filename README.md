@@ -26,7 +26,7 @@ Clone repo
 ```
 git clone https://github.com/Doppler344/rishat_test_task
 ```
-Intall requirements
+Install requirements
 
 ```
 pip install -r requirements.txt
