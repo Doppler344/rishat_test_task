@@ -33,6 +33,7 @@ pip install -r requirements.txt
 ```
 Next step you need create .env file for secret keys. Check here - https://django-environ.readthedocs.io/en/latest/quickstart.html 
 > Check settings.py, create django secret key for .env - https://djecrety.ir/
+> 
 > Register at https://stripe.com/ for get stripe keys
 
 Add all Secret keys to .env
