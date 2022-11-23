@@ -32,7 +32,7 @@ STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['82.148.28.138']
 
 
 # Application definition
