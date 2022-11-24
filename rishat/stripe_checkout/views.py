@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views.decorators.http import require_http_methods
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpRequest
 
 from .models import Item, Order, OrderSet
 
@@ -31,8 +31,8 @@ def buy_item(request, item_id):
             'quantity': 1,
         }, ],
         mode='payment',
-        success_url='http://127.0.0.1:8000/success',
-        cancel_url='http://127.0.0.1:8000/cancel',
+        success_url=f'http://{request.get_host()}/success',
+        cancel_url=f'http://{request.get_host()}/cancel',
     )
 
     return JsonResponse({'id': session.id})
@@ -46,7 +46,7 @@ def get_order(request, order_id):
 
 
 @require_http_methods(["GET"])
-def buy_order(request, order_id):
+def buy_order(request: HttpRequest, order_id):
     stripe.api_key = STRIPE_SECRET_KEY
     order = get_object_or_404(Order, id=order_id)
     discount_amount = order.discount_id.amount * 100  # because of %
@@ -79,8 +79,8 @@ def buy_order(request, order_id):
         line_items=items,
         mode='payment',
         discounts=[{'coupon': discount.id}, ],
-        success_url='http://127.0.0.1:8000/success',
-        cancel_url='http://127.0.0.1:8000/cancel',
+        success_url=f'http://{request.get_host()}/success',
+        cancel_url=f'http://{request.get_host()}/cancel',
     )
 
     return JsonResponse({'id': session.id})
