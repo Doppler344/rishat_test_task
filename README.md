@@ -61,6 +61,7 @@ Congratulations!
 
 ## Docker-way
 Install docker https://docs.docker.com/engine/install/
+
 Clone my image
 
 ```
