@@ -12,6 +12,7 @@
 
 
 ## Installation
+## Without-docker-way
 
 Requires [Python](https://www.python.org//) v3.10+ to run.
 
@@ -57,5 +58,27 @@ python manage.py runserver
 ```
 
 Congratulations!
+
+## Docker-way
+Install docker https://docs.docker.com/engine/install/
+Clone my image
+
+```
+docker pull doppler344/rishat:latest
+```
+
+Run it
+
+```
+docker run -d -p 80:8000 rishat -rm doppler344/rishat:latest
+```
+
+Check all is OK
+
+```
+docker ps
+```
+Congratulations!
+
 
 **Grigoryan Dmitry**
